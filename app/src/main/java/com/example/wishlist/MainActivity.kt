@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
         val price = findViewById<EditText>(R.id.priceEditText)
         val url = findViewById<EditText>(R.id.urlEditText)
 
-        //var userItem = findViewById<TextView>(R.id.nameEditText)
-        //var userPrice = findViewById<TextView>(R.id.priceEditText)
-        //var userURL = findViewById<TextView>(R.id.urlEditText)
-
         val itemRv = findViewById<RecyclerView>(R.id.itemRv)
         itemRv.adapter = adapter
 
@@ -44,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             var actualItem = Item(userItem, userPrice, userURL)
 
             insertItem(actualItem)
+
+            item.getText().clear()
+            price.getText().clear()
+            url.getText().clear()
         }
 
         itemRv.layoutManager = LinearLayoutManager(this)
@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insertItem(item: Item){
-        items.add(0, item)
-        adapter.notifyItemInserted(0)
+        items.add(item)
+        adapter.notifyItemInserted(items.size - 1)
     }
 
     fun Activity.hideSoftKeyboard(){
